@@ -27,6 +27,7 @@ function App() {
     event.preventDefault();
     fetchMovies(search)
       .then(data => {
+        console.log(data)
         setSearchResult(data)
         setSearch("")
       })
@@ -35,6 +36,7 @@ function App() {
   const handleClick = () => {
     fetchMovies(search)
       .then(data => {
+        console.log(data)
         setSearchResult(data)
         setSearch("")
       })

@@ -5,10 +5,15 @@ export const fetchMovies = async (
 ): Promise<MovieModel[] | null> => {
   name = name.trim().toLowerCase().replace(" ", "%");
   const url = `${process.env.REACT_APP_BASE_URL}?query=${name}`;
-  const headers = {
-    Authorization: `Bearer ${process.env.REACT_API_TOKEN}`,
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${process.env.REACT_APP_API_TOKEN}`
+    }
   };
-  const response = await fetch(url, { headers });
+
+  const response = await fetch(url, options);
   const json = await response.json();
   let movies = json.results as MovieModel[];
   if (!Array.isArray(movies)) {
