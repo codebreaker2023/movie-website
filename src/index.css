@@ -23,20 +23,6 @@ input {
   width: 100%;
 }
 
-button {
-  border: none;
-  padding: 0 30px;
-  margin-left: -10px;
-  border-top-right-radius: var(--s-radius);
-  border-bottom-right-radius: var(--s-radius);
-  font-size: 20px;
-  font-weight: bold;
-  background-color: orange;
-  color: white;
-  transition: background-color 0.3s ease;
-  cursor: pointer;
-}
-
 button:hover {
   background-color: rgb(255, 190, 71);
 }

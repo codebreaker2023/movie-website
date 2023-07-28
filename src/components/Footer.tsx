@@ -3,8 +3,8 @@ import React from 'react'
 
 const Footer = () => {
   return (
-    <Box sx={{textAlign: "center", padding: "20px 0", backgroundColor: "black", color: "white"}}>
-        @CopyRight | MovieWorld
+    <Box color="secondary" sx={{textAlign: "center", padding: "20px 0", color: "white"}}>
+        @CopyRight | Salahuddin Sediqi
     </Box>
   )
 }

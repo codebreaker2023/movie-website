@@ -1,12 +1,9 @@
-import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material'
 import React from 'react'
-import MovieModel from '../models/MovieModel'
+import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material'
+
+// Project Dependencies
+import MovieProps from '../props/MovieProps'
 import Rating from './Rating'
-
-
-interface MovieProps {
-    movie: MovieModel
-}
 
 const Movie: React.FC<MovieProps> = ({ movie }) => {
 
@@ -15,6 +12,11 @@ const Movie: React.FC<MovieProps> = ({ movie }) => {
         position: "relative",
         borderRadius: "20px",
         minWidth: "250px",
+        scale: 1,
+        '&:hover': {
+            transform: 'scale(1.015)',
+            transition: 'transform 0.5s ease-in-out',
+        },
     }}>
         <CardActionArea>
             <CardMedia 
@@ -26,12 +28,18 @@ const Movie: React.FC<MovieProps> = ({ movie }) => {
                 display: "flex", 
                 justifyContent: "space-between", 
                 alignItems: "center",
-                backgroundColor: "orange",
                 position: "absolute",
                 bottom: "0px",
                 width: "100%",
                 opacity: "90%",
-                minHeight: "150px"
+                minHeight: "150px",
+                
+                background: "linear-gradient(90deg, #211a14b3 20%, rgba(83, 71, 31, 0.5) 100%)",
+                transition: "min-height 0.4s ease-out",
+                ":hover": {
+                    minHeight: "400px",
+                    visibility: "visible",
+                }
             }}>
                 <Typography variant="body1" sx={{fontWeight: "bold", color: "white"}}>{movie.title}</Typography>
                 <Rating rating={movie.vote_average}/>

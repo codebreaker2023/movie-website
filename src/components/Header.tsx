@@ -4,7 +4,7 @@ import SearchProps from '../props/SearchProps'
 import SearchBar from './SearchBar'
 
 
-const Header: React.FC<SearchProps> = ({ value, onChange, onSubmit }) => {
+const Header: React.FC<SearchProps> = ({ value, onChange, onSubmit, onClicked }) => {
   return (
     <Grid container sx={{
         backgroundImage: "url(https://cdn.wallpapersafari.com/13/91/t4vwz6.jpg)",
@@ -16,7 +16,7 @@ const Header: React.FC<SearchProps> = ({ value, onChange, onSubmit }) => {
         justifyContent: "center",
         alignItems: "center",
         }}>
-        <SearchBar value={value} onChange={onChange} onSubmit={onSubmit}/>
+        <SearchBar value={value} onChange={onChange} onSubmit={onSubmit} onClicked={onClicked}/>
     </Grid>
   )
 }

@@ -1,11 +1,10 @@
+import React from 'react'
 import { Star } from '@mui/icons-material'
 import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import React from 'react'
 
-interface RatingProps {
-    rating: number
-}
+// Project Dependencies
+import RatingProps from '../props/RatingProps'
 
 const Rating: React.FC<RatingProps> = ({ rating }) => {
   return (
@@ -19,7 +18,7 @@ const Rating: React.FC<RatingProps> = ({ rating }) => {
         padding: "10px"
     }}>
         <Star color="primary"/>
-        <Typography>{rating}</Typography>
+        <Typography>{rating.toFixed(1)}</Typography>
     </Box>
   )
 }
