@@ -1,24 +1,40 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import MovieList from './components/MovieList';
+import SearchResult from './components/SearchResult';
+import MovieModel from './models/MovieModel';
+import ApiService from './utils/ApiService';
+
 
 function App() {
+  const [searchResult, setSearchResult] = useState<MovieModel[] | null>()
+  const [search, setSearch] = useState<string>("")
+
+  
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+      event.preventDefault()
+      setSearch(event.target.value)
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const apiService = new ApiService() 
+    apiService.fetchMovie(search)
+      .then(data => {
+        console.log(data)
+        setSearchResult(data)
+        setSearch("")
+      })
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+        <Header value={search} onChange={ handleChange } onSubmit={ handleSubmit }/>
+        {searchResult ? (<SearchResult movies={searchResult} />) : (<></>)}
+        <MovieList bgColor="transparent" title="Favorite Movies" favorite="The Hobbit"/>
+        <MovieList bgColor="#0C0C0C" title="Favorite Series" favorite="The Witcher"/>
+        <Footer />
     </div>
   );
 }
