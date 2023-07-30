@@ -1,5 +1,6 @@
-export default interface MovieListProps {
+export interface MovieListProps {
     bgColor: string;
     title: string;
-    favorite: string
+    favorite: string;
+    onMovieClick: (movieId: number) => void;
 }

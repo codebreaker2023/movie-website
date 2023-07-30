@@ -1,7 +1,6 @@
 import { Button, Grid } from "@mui/material";
 
-// Project Dependencies
-import SearchProps from "../props/SearchProps";
+import { SearchProps } from "../props";
 
 const SearchBar: React.FC<SearchProps> = ({
   value,

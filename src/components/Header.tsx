@@ -1,7 +1,8 @@
 import { Grid } from '@mui/material'
 import React from 'react'
-import SearchProps from '../props/SearchProps'
-import SearchBar from './SearchBar'
+
+import { SearchProps } from '../props'
+import { SearchBar } from './'
 
 
 const Header: React.FC<SearchProps> = ({ value, onChange, onSubmit, onClicked }) => {

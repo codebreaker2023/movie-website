@@ -1,5 +1,6 @@
-import MovieModel from "../models/MovieModel";
+import { MovieModel } from "../models";
 
-export default interface MovieProps {
-    movie: MovieModel
+export interface MovieProps {
+    movie: MovieModel;
+    onMovieClick: (movieId: number) => void;
 }

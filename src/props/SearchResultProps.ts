@@ -1,5 +1,6 @@
-import MovieModel from "../models/MovieModel";
+import { MovieModel } from "../models";
 
-export default interface SearchResultProps {
-    movies: MovieModel[]
+export interface SearchResultProps {
+    movies: MovieModel[];
+    onMovieClick: (movieId: number) => void;
 }

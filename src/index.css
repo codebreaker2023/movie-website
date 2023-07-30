@@ -2,6 +2,7 @@
   --s-radius: 4px;
   --radius: 10px;
   --lg-radius: 20px;
+  --light-gray: #d3d3d3;
 }
 * {
   margin: 0;

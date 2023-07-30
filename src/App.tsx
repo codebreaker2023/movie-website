@@ -1,64 +1,80 @@
-import React, { useState } from 'react';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { amber } from '@mui/material/colors';
+import React, { useState } from "react";
+import { ThemeProvider } from "@mui/material/styles";
 
-
-// Project Dependencies
-import Footer from './components/Footer';
-import Header from './components/Header';
-import MovieList from './components/MovieList';
-import SearchResult from './components/SearchResult';
-import MovieModel from './models/MovieModel';
-import { fetchMovies } from './utils/ApiService';
-
-
+import { PopUpWindow, SearchResult, MovieList, Header, Footer } from "./components";
+import { MovieDetails, MovieModel } from "./models";
+import { fetchMovies, fetchMovieById, theme } from "./utils";
 
 function App() {
-  const [searchResult, setSearchResult] = useState<MovieModel[] | null>()
-  const [search, setSearch] = useState<string>("")
+  const [searchResult, setSearchResult] = useState<MovieModel[] | null>();
+  const [search, setSearch] = useState<string>("");
+  const [isPopUpVisible, setIsPopUpVisible] = useState<boolean>(false);
+  const [movieDetails, setMovieDetals] = useState<MovieDetails | null>(null);
 
-  
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-      event.preventDefault()
-      setSearch(event.target.value)
+    event.preventDefault();
+    setSearch(event.target.value);
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    fetchMovies(search)
-      .then(data => {
-        console.log(data)
-        setSearchResult(data)
-        setSearch("")
-      })
+    fetchMovies(search).then((data) => {
+      console.log(data);
+      setSearchResult(data);
+      setSearch("");
+    });
   };
 
   const handleClick = () => {
-    fetchMovies(search)
-      .then(data => {
-        console.log(data)
-        setSearchResult(data)
-        setSearch("")
-      })
-  }
-  
-  const theme = createTheme({
-    palette: {
-      primary: amber,
-      secondary: {
-        light: "#1a1a1a", 
-        main: "#0C0C0C",
-      }
-    },
-  });
+    fetchMovies(search).then((data) => {
+      console.log(data);
+      setSearchResult(data);
+      setSearch("");
+    });
+  };
+
+  const handleOnMovieClick = (movieId: number) => {
+    setIsPopUpVisible((old) => !old);
+    fetchMovieById(movieId).then((data) => setMovieDetals(data));
+  };
 
   return (
     <ThemeProvider theme={theme}>
-        <Header value={search} onChange={ handleChange } onSubmit={ handleSubmit } onClicked={handleClick}/>
-        {searchResult ? (<SearchResult movies={searchResult} />) : (<></>)}
-        <MovieList bgColor="transparent" title="Favorite Movies" favorite="The Hobbit"/>
-        <MovieList bgColor="#0C0C0C" title="Favorite Series" favorite="The Witcher"/>
+      <div style={{ filter: isPopUpVisible ? "blur(10px)" : "none" }}>
+        <Header
+          value={search}
+          onChange={handleChange}
+          onSubmit={handleSubmit}
+          onClicked={handleClick}
+        />
+        { searchResult ? (
+          <SearchResult
+            movies={searchResult}
+            onMovieClick={handleOnMovieClick}
+          />
+        ) : (<></>)}
+        <MovieList
+          bgColor="transparent"
+          title="Favorite Movies"
+          favorite="The Hobbit"
+          onMovieClick={handleOnMovieClick}
+        />
+        <MovieList
+          bgColor="#0C0C0C"
+          title="Favorite Series"
+          favorite="The Witcher"
+          onMovieClick={handleOnMovieClick}
+        />
         <Footer />
+      </div>
+      {isPopUpVisible && movieDetails ? (
+        <PopUpWindow
+          setIsPopUpVisible={setIsPopUpVisible}
+          movieDetails={movieDetails}
+        />
+      ) : (
+        <></>
+      )}
     </ThemeProvider>
   );
 }

@@ -1,0 +1,8 @@
+export { default as Header } from "./Header"
+export { default as Footer } from "./Footer"
+export { default as Movie } from "./Movie"
+export { default as MovieList } from "./MovieList"
+export { default as Rating } from "./Rating"
+export { default as SearchBar } from "./SearchBar"
+export { default as SearchResult } from "./SearchResult"
+export { default as PopUpWindow } from "./PopUp/PopUpWindow"

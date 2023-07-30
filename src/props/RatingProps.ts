@@ -1,3 +1,3 @@
-export default interface RatingProps {
+export interface RatingProps {
     rating: number
 }
